@@ -42,21 +42,7 @@ const login = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-const change = async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    const user = await User.findOne({ username });
-    console.log(user);
-    if (!user) {
-      return res.status(401).json({ message: "Invalid username or password" });
-    }
-    const res = user.changePassword(password);
-    return res.status(200).json({ message: "Password Changed!!!" });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
+
 module.exports = {
   register,
   login,

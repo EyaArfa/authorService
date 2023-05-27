@@ -15,13 +15,5 @@ UserSchema.methods.comparePassword = async function (password) {
   const user = this;
   return bcrypt.compare(password, user.password);
 };
-UserSchema.methods.changePassword = async function (password) {
-  const pass = await bcrypt.hash(password, 10);
-  this.password = pass;
-  try {
-    await this.save();
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+
 module.exports = mongoose.model("User", UserSchema);
