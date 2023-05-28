@@ -12,8 +12,12 @@ const register = async (req, res) => {
 
     const user = new User({ username, password });
     await user.save();
-
-    return res.status(201).json({ message: "User registered successfully" });
+    if (user) {
+      const token = jwt.sign({ userId: user._id }, "your-secret-key");
+    
+    return res
+      .status(201)
+      .json({ message: "User registered successfully", token: token });}
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
@@ -46,5 +50,4 @@ const login = async (req, res) => {
 module.exports = {
   register,
   login,
-  change,
 };
