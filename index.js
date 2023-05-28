@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 app.post("/api/author/register", userController.register);
 app.post("/api/author/login", userController.login);
-app.use("/api/quiz/", Quize);
+app.use("/api/quiz", Quize);
 app.get("/api/author/getToken", authenticate, (req, res) => {
   res.status(200).json({ message: "authenticated successfully" });
 });
